@@ -1,9 +1,3 @@
-
-// document.querySelector("button").addEventListener("click", handleClick); // we don't want the function to trigger immediatly, so we don't use a paranthesis.
-// function handleClick(){
-//   alert("I got clicked.");
-// }
-
 function checkKey(key){
   switch (key) {
     case "w":
@@ -39,16 +33,30 @@ function checkKey(key){
   }
   }
 
-//For Button Press
-var drumCount= document.querySelectorAll(".drum").length;
-for (var i = 0; i < drumCount; i++) {
-  document.querySelectorAll(".drum")[i].addEventListener("click", function(){
-    var btnHtml = this.innerHTML;
-    checkKey(btnHtml);
-  });
-}
+  //For Button Press
+  var drumCount= document.querySelectorAll(".drum").length;
+  for (var i = 0; i < drumCount; i++) {
+    document.querySelectorAll(".drum")[i].addEventListener("click", function(){
+      var btnHtml = this.innerHTML;
+      checkKey(btnHtml);
+      buttonAnimation(btnHtml);
+    });
+  }
 
-//For keyboard Press
-document.addEventListener("keydown", function(event){
-  checkKey(event.key);
-});
+  //For keyboard Press
+  document.addEventListener("keydown", function(event){
+    checkKey(event.key);
+    buttonAnimation(event.key)
+  });
+
+
+  //Button Animation
+
+function buttonAnimation(currentKey){
+  var activeButton= document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function(){
+    activeButton.classList.remove("pressed");
+  },100);
+}
